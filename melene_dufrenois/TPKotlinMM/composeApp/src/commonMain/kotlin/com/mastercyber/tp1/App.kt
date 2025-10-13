@@ -34,16 +34,13 @@ fun App() {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+            var name by remember { mutableStateOf<String?>(null) }
+            LaunchedEffect(showContent) {
+                if (showContent) {
+                    name = Greeting().fetchPokemon()
                 }
             }
+            Text("Compose: $name")
         }
     }
 }

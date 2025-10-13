@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import io.ktor.client.request.get
 
 class Greeting {
     private val platform = getPlatform()
@@ -16,6 +17,15 @@ class Greeting {
                 ignoreUnknownKeys = true
             })
         }
+    }
+
+    suspend fun fetchPokemon(): String? {
+        val random = (1..1025).random()
+        val response: Pokemon =
+            client.get("https://tyradex.vercel.app/api/v1/pokemon/$random").body()
+        client.close()
+        return response.name?.fr ?: "Unknown"
+    }
 
     fun greet(): String {
         return "Hello, ${platform.name}!"
