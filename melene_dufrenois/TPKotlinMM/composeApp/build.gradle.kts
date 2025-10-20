@@ -64,6 +64,10 @@ kotlin {
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -71,6 +75,7 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation("io.ktor:ktor-client-cio:${ktorVersion}")
         }
     }
 }
